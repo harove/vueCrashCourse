@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header title="Task Tracker" />
+    <AddTask @add-task="addTask" />
     <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
   </div>
 </template>
@@ -8,9 +9,12 @@
 <script>
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import AddTask from "./components/AddTask";
+
+
 export default {
   name: "App",
-  components: { Header, Tasks },
+  components: { Header, Tasks, AddTask },
   data() {
     return {
       tasks: [],
@@ -24,6 +28,9 @@ export default {
     toggleReminder(id){
       const index = this.tasks.findIndex(task=>task.id === id)
       this.tasks.splice(index,1,{...this.tasks[index],reminder:!this.tasks[index].reminder})
+    },
+    addTask(task){
+      this.tasks = [...this.tasks, task]
     }
   },
   created() {
