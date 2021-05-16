@@ -23,7 +23,7 @@ export default {
     },
     toggleReminder(id){
       const index = this.tasks.findIndex(task=>task.id === id)
-      console.log(index)
+      this.tasks.splice(index,1,{...this.tasks[index],reminder:!this.tasks[index].reminder})
     }
   },
   created() {
